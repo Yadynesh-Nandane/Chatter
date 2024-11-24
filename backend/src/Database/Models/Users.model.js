@@ -20,6 +20,17 @@ const UserSchema = new mongoose.Schema(
     address: { type: String },
     friends: [{ type: mongoose.Schema.Types.ObjectId, ref: "Friends" }],
     sentMessages: [{ type: mongoose.Schema.Types.ObjectId, ref: "Messages" }],
+
+    // note: Added online offline status state in model
+    statusState: {
+      type: String,
+      enum: {
+        values: ["online", "offline"],
+        message: `Invalid status state {value}`,
+      },
+      required: true,
+      default: "offline",
+    },
     receivedMessages: [
       { type: mongoose.Schema.Types.ObjectId, ref: "Messages" },
     ],
