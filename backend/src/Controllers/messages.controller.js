@@ -1,9 +1,12 @@
 import Messages from "../Database/Models/Messages.model.js";
 
-const createMessage = async (req, res) => {
+const sendMessage = async (req, res) => {
   try {
-    const { readReceipt, messageContent, sentBy, sentTo } = req.body;
-    console.log("request: ", req);
+    const { messageContent } = req.body.messageContent;
+    console.log("request body: ", req.body);
+    const sentBy = req.user._id;
+    const sentTo = req.params.id;
+    const readReceipt = req.body.readReceipt || "sent";
 
     const createdMessage = await Messages.create({
       readReceipt,
@@ -20,17 +23,28 @@ const createMessage = async (req, res) => {
 };
 const getAllMessagesBySenderId = async (req, res) => {
   try {
-    console.log("request : ", req);
+    // console.log("request : ", req);
     // const senderId = req.query.sentBy;
-    const senderId = req.params.id;
+    const senderId = req.user._id;
+    const receiverId = req.params.id;
 
-    const messageExists = await Messages.find({ sentBy: senderId });
+    // const messageExists = await Messages.find({sentBy: senderId});
+    const messageExists = await Messages.find({
+      $or: [
+        { sentBy: senderId, sentTo: receiverId },
+        { sentBy: receiverId, sentTo: senderId },
+      ],
+    });
 
     if (messageExists) res.status(200).json(messageExists);
     else res.status(404).json({ message: "Start Messaging" });
+
+    // todo: realtime messaging logic goes here => WebSocket.io
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-export { createMessage, getAllMessagesBySenderId };
+const createMessage = async () => {};
+
+export { createMessage, getAllMessagesBySenderId, sendMessage };

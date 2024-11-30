@@ -30,14 +30,28 @@ const createUsers = async (req, res) => {
       password,
     });
 
-    res.status(200).json(newUser);
+    return res.status(200).json(newUser);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: error.message });
   }
 };
 
 // Function: To Update user using email
-const updateUser = async (req, res) => {};
+const updateProfile = async (req, res) => {
+  try {
+    const userId = req.user._id;
+    const updateduser = await User.findByIdAndUpdate(
+      userId,
+      { statusState: "online" },
+      { new: true }
+    );
+
+    res.status(200).json({ updateduser });
+  } catch (error) {
+    console.error("Error in updateprofile controller", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
 
 //function: Controller to fetch user by id
 const getUserInfoById = async (req, res) => {
@@ -53,10 +67,4 @@ const getUserInfoById = async (req, res) => {
   }
 };
 
-
-export {
-  getAllUsers,
-  createUsers,
-  updateUser,
-  getUserInfoById,
-};
+export { getAllUsers, createUsers, updateProfile, getUserInfoById };

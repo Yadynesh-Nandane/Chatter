@@ -15,9 +15,10 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: [true, "Enter a password"],
       validator: [validator.isStrongPassword, "Enter a strong password"],
+      minlength: [8, "Password too small"],
     },
+    address: { type: String, required: [true, "Address Cannot be Empty"] },
     lastSeen: { type: String },
-    address: { type: String },
     friends: [{ type: mongoose.Schema.Types.ObjectId, ref: "Friends" }],
     sentMessages: [{ type: mongoose.Schema.Types.ObjectId, ref: "Messages" }],
 
@@ -28,7 +29,7 @@ const UserSchema = new mongoose.Schema(
         values: ["online", "offline"],
         message: `Invalid status state {value}`,
       },
-      required: true,
+      // required: true,
       default: "offline",
     },
     receivedMessages: [

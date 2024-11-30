@@ -4,7 +4,7 @@ const MessagesSchema = new mongoose.Schema(
   {
     readReceipt: {
       type: String,
-      required: [true, "Read Receipt Mandatory"],
+      // required: [true, "Read Receipt Mandatory"],
       enum: {
         values: ["sent", "received", "read"],
         message: `Ivalid value {VALUE}`,
@@ -15,15 +15,17 @@ const MessagesSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Users",
       required: [true, "Sender cannot be Empty"],
+      unique: [true],
     },
     sentTo: {
-      type: [mongoose.Schema.Types.ObjectId],
+      type: mongoose.Schema.Types.ObjectId,
       ref: "Users",
       required: [true, "At Least One senderId required"],
-      validate: {
-        validator: (v) => v.length > 0,
-        message: `{VALUE} At least One Sender is needed`,
-      },
+      // Note: Future Scope (Group Chat)
+      // validate: {
+      //   validator: (v) => v.length > 0,
+      //   message: `{VALUE} At least One Sender is needed`,
+      // },
     },
   },
   { timestamps: true }
