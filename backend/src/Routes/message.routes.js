@@ -4,7 +4,7 @@ import express from "express";
 
 import {
   createMessage,
-  getAllMessagesBySenderId,
+  getAllMessagesByReceiverId,
   sendMessage,
 } from "../Controllers/messages.controller.js";
 import { protectedRoute } from "../Middleware/auth.middleware.js";
@@ -13,6 +13,6 @@ const router = express.Router();
 
 // router.route("/").post(protectedRoute, createMessage);
 router.route("/send/:id").post(protectedRoute, sendMessage);
-router.route("/:id").get(protectedRoute, getAllMessagesBySenderId);
+router.route("/:id").get(protectedRoute, getAllMessagesByReceiverId);
 
 export default router;

@@ -21,7 +21,7 @@ const sendMessage = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-const getAllMessagesBySenderId = async (req, res) => {
+const getAllMessagesByReceiverId = async (req, res) => {
   try {
     // console.log("request : ", req);
     // const senderId = req.query.sentBy;
@@ -47,4 +47,4 @@ const getAllMessagesBySenderId = async (req, res) => {
 
 const createMessage = async () => {};
 
-export { createMessage, getAllMessagesBySenderId, sendMessage };
+export { createMessage, getAllMessagesByReceiverId, sendMessage };

@@ -3,12 +3,13 @@ import express from "express";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 
+import { app, server } from "./Utils/socket.js";
 import authRouter from "./Routes/auth.routes.js";
 import userRouter from "./Routes/user.routes.js";
 import friendsRouter from "./Routes/friends.routes.js";
 import messageRouter from "./Routes/message.routes.js";
 
-const app = express();
+// const app = express();
 
 // App Config
 app.use(cookieParser());
