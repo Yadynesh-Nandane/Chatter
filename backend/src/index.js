@@ -1,5 +1,5 @@
 // import app from "./app.js";
-import {app, server} from "./Utils/socket.js";
+import { server } from "./Utils/socket.js";
 import dotenv from "dotenv";
 import { Database } from "./Database/connect.js";
 

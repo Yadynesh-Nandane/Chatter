@@ -3,18 +3,18 @@ import express from "express";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 
-import { app, server } from "./Utils/socket.js";
+// import { app, server } from "./Utils/socket.js";
 import authRouter from "./Routes/auth.routes.js";
 import userRouter from "./Routes/user.routes.js";
 import friendsRouter from "./Routes/friends.routes.js";
 import messageRouter from "./Routes/message.routes.js";
 
-// const app = express();
+const app = express();
 
 // App Config
 app.use(cookieParser());
 app.use(express.json({ limit: "50mb" }));
-app.use(cors({ origin: true, credentials: true }));
+app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/api/v1/auth", authRouter);
