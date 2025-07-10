@@ -4,7 +4,7 @@ export const generateToken = (userId, res) => {
   
   const env = process.env.ENV;
   const secret = process.env.JWT_SECRET;
-  const token = jwt.sign(userId, secret, {
+  const token = jwt.sign({userId}, secret, {
     expiresIn: "7d",
   });
 
