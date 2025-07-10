@@ -8,7 +8,7 @@ export const generateToken = (userId, res) => {
     expiresIn: "7d",
   });
 
-  res.cookie("JWT", token, {
+  res.cookie("jwt", token, {
     httpOnly: true, // prevent XSS attacks (cross site scripting)
     sameSite: "strict", //prevents CSRF attacks (cross site request forgery attacks)
     secure: env !== "DEV",

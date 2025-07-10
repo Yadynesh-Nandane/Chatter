@@ -6,8 +6,8 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "set ENV=DEV && node src/index.js",
-    "dev": "set ENV=DEV && nodemon src/index.js"
+    "start": "set ENV=PROD&& node src/index.js",
+    "dev": "set ENV=DEV&& nodemon src/index.js"
   },
   "keywords": [],
   "author": "Yadynesh Nandane",

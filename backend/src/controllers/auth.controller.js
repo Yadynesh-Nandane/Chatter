@@ -88,7 +88,8 @@ export const signInController = async (req, res) => {
 
 export const signOutController = async (req, res) => {
   try {
-    res.cookie("JWT", "", { maxAge: 0 });
+    console.log(process.env.ENV !== "DEV")
+    res.cookie("jwt", "", { maxAge: 0 });
     res.status(200).json({ message: "Signed Out Successfully!" });
   } catch (error) {
     console.log("Error", error);
