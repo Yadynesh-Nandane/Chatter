@@ -2,10 +2,11 @@ import mongoose, { mongo } from "mongoose";
 
 const userSchema = new mongoose.Schema(
   {
-    phone: { type: String, maxlength: 17 },
     name: { type: String, required: true },
+    phone: { type: String, maxlength: 17 },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true, minlength: 6 },
+    friends: {type: [mongoose.Schema.Types.ObjectId], ref: "User", default: []},
   },
   { timestamps: true }
 );
