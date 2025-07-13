@@ -1,13 +1,20 @@
 import bcrypt from "bcrypt";
-
 import User from "../models/user.model.js";
 import { generateToken } from "../utils/jwt.js";
 
 export const hashPass = async (password) => {
-  console.log("hasspass executed:");
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt);
   return hashedPassword;
+};
+
+export const checkAuth = async (req, res, next) => {
+  try {
+    res.status(200).json(req.user);
+  } catch (error) {
+    console.error("Error while authenticating user: ", error);
+    res.status(500).json({ message: "Internal Server Error!" });
+  }
 };
 
 export const signUpController = async (req, res) => {
@@ -18,10 +25,12 @@ export const signUpController = async (req, res) => {
       return res.status(400).json({ message: "All fields are required." });
     }
 
-    // if (password.length < 6) {
-    //   console.log("Second if executed.");
-    //   return res.status(400).json({ message: "Password must at 6 characters." });
-    // }
+    if (password.length < 6) {
+      console.log("Second if executed.");
+      return res
+        .status(400)
+        .json({ message: "Password must at 6 characters." });
+    }
 
     const user = await User.findOne({ email });
     if (user) {
@@ -29,7 +38,7 @@ export const signUpController = async (req, res) => {
       return res.status(400).json({ message: "User already exists!" });
     }
 
-    // const hashedPassword = await hashPass(password);
+    const hashedPassword = await hashPass(password);
 
     // Creating new user.
     const newUser = new User({
@@ -40,7 +49,6 @@ export const signUpController = async (req, res) => {
     });
 
     if (newUser) {
-      console.log("fourth if executed.");
       // Generating JWT token.
       generateToken(newUser._id, res);
       await newUser.save();
@@ -88,7 +96,6 @@ export const signInController = async (req, res) => {
 
 export const signOutController = async (req, res) => {
   try {
-    console.log(process.env.ENV !== "DEV")
     res.cookie("jwt", "", { maxAge: 0 });
     res.status(200).json({ message: "Signed Out Successfully!" });
   } catch (error) {
