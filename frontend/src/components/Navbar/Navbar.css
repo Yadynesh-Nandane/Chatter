@@ -28,11 +28,12 @@ nav {
 }
 
 .nav-ul {
-  width: 100%;
+  /* width: 100%; */
+  width: auto;
   display: flex;
   flex-direction: row;
   list-style-type: none;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .nav-link {

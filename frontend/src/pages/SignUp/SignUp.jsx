@@ -2,9 +2,17 @@ import "./SignUp.css";
 import chat from "../../assets/chat2.gif";
 import okay from "../../assets/icons8-ok.gif";
 
-import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import {
+  FaEye,
+  FaLock,
+  FaEyeSlash,
+  FaEnvelope,
+  FaCircleUser,
+  FaMobileButton,
+} from "react-icons/fa6";
+import { Link, useNavigate } from "react-router-dom";
 
 import { axiosInstance } from "../../utils/axios";
 import { signedInSlice } from "../../utils/authSlice";
@@ -22,13 +30,16 @@ const SignUp = () => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [disabled, setDisabled] = useState(true);
+  const [cnfPassword, setCnfPassword] = useState("");
+  const [passwordVisibility, setPasswordVisibility] = useState(false);
+  const [cnfPasswordVisibility, setCnfPasswordVisibility] = useState(false);
 
   // React built in hook.
   useEffect(() => {
-    if (name && email && phone && password) {
+    if (name && email && phone && password && cnfPassword) {
       setDisabled(false);
     }
-  }, [name, email, phone, password]);
+  }, [name, email, phone, password, cnfPassword]);
 
   // Function: To handle form submit action.
   const onClickHandler = async (e) => {
@@ -76,6 +87,9 @@ const SignUp = () => {
             </div>
             <form className="signup-form">
               <div className="signup-inp-container">
+                <div className="signup-icon-container-before">
+                  <FaCircleUser className="signup-icon name-icon" />
+                </div>
                 <CustomInput
                   inpId={"name"}
                   inpType={"text"}
@@ -90,6 +104,9 @@ const SignUp = () => {
                 />
               </div>
               <div className="signup-inp-container">
+                <div className="signup-icon-container-before">
+                  <FaEnvelope className="signup-icon email-icon" />
+                </div>
                 <CustomInput
                   inpId={"email"}
                   inpType={"email"}
@@ -103,6 +120,9 @@ const SignUp = () => {
                 />
               </div>
               <div className="signup-inp-container">
+                <div className="signup-icon-container-before">
+                  <FaMobileButton className="signup-icon phone-icon" />
+                </div>
                 <CustomInput
                   inpId={"phone"}
                   inpType={"tel"}
@@ -116,9 +136,11 @@ const SignUp = () => {
                 />
               </div>
               <div className="signup-inp-container">
+                <div className="signup-icon-container-before">
+                  <FaLock className="signup-icon password-icon" />
+                </div>
                 <CustomInput
                   inpId={"password"}
-                  inpType={"password"}
                   inpName={"password"}
                   inpPlaceholder={"********"}
                   inpAutoComplete={"new-password"}
@@ -126,7 +148,46 @@ const SignUp = () => {
                   onChange={(e) => {
                     setPassword(e.target.value);
                   }}
+                  inpType={passwordVisibility ? "text" : "password"}
                 />
+                <div
+                  className="signup-icon-container-after"
+                  onClick={() => setPasswordVisibility(!passwordVisibility)}
+                >
+                  {passwordVisibility ? (
+                    <FaEyeSlash className="signup-icon passvisibility-icon" />
+                  ) : (
+                    <FaEye className="signup-icon passvisibility-icon" />
+                  )}
+                </div>
+              </div>
+              <div className="signup-inp-container">
+                <div className="signup-icon-container-before">
+                  <FaLock className="signup-icon passvisibility-icon" />
+                </div>
+                <CustomInput
+                  inpId={"cnf-password"}
+                  inpName={"cnf-password"}
+                  inpPlaceholder={"Confirm Password"}
+                  inpAutoComplete={"new-password"}
+                  inpClass={"signup-inp cnf-password"}
+                  onChange={(e) => {
+                    setCnfPassword(e.target.value);
+                  }}
+                  inpType={cnfPasswordVisibility ? "text" : "password"}
+                />
+                <div
+                  className="signup-icon-container-after"
+                  onClick={() =>
+                    setCnfPasswordVisibility(!cnfPasswordVisibility)
+                  }
+                >
+                  {cnfPasswordVisibility ? (
+                    <FaEyeSlash className="signup-icon passvisibility-icon" />
+                  ) : (
+                    <FaEye className="signup-icon passvisibility-icon" />
+                  )}
+                </div>
               </div>
               <div className="signup-btn-container">
                 <CustomButton
@@ -138,11 +199,6 @@ const SignUp = () => {
                   btnClass={"btn-signup-submit"}
                 />
               </div>
-              <p className="signup-links">
-                <Link className="signup-link forget-password-link" to="/signin">
-                  Forget Password?
-                </Link>
-              </p>
               <p className="signup-links">
                 Already have an account?{" "}
                 <Link className="signup-link signin-page-link" to="/signin">

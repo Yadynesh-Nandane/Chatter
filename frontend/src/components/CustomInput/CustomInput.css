@@ -10,7 +10,7 @@ input {
   border: none;
   outline: none;
   padding: 0 1rem;
-  border-radius: 6px;
+  /* border-radius: 0 6px 6px 0; */
   background-color: #E1E1E1;
 }
 

@@ -1,7 +1,9 @@
-import { Link } from "react-router-dom";
 import "./Navbar.css";
+import { Link, useLocation } from "react-router-dom";
 
 const Navbar = () => {
+  const pathname = useLocation().pathname;
+
   return (
     <div className="navbar-container">
       <div className="navbar-wrapper">
@@ -19,11 +21,15 @@ const Navbar = () => {
               <Link className="nav-link" to="/about">
                 <li className="nav-li">About</li>
               </Link>
-              <li className="nav-li">
-                <Link className="nav-signin-link" to="/signin">
-                  Sign In
-                </Link>
-              </li>
+              {pathname == "/signin" || pathname == "/signup" ? (
+                ""
+              ) : (
+                <li className="nav-li">
+                  <Link className="nav-signin-link" to="/signin">
+                    Sign In
+                  </Link>
+                </li>
+              )}
             </ul>
           </nav>
         </div>
