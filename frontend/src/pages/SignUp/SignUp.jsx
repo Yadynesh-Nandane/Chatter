@@ -2,7 +2,7 @@ import "./SignUp.css";
 import chat from "../../assets/chat2.gif";
 import okay from "../../assets/icons8-ok.gif";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import {
   FaEye,
@@ -31,6 +31,7 @@ const SignUp = () => {
   const [success, setSuccess] = useState(false);
   const [disabled, setDisabled] = useState(true);
   const [cnfPassword, setCnfPassword] = useState("");
+  const signedIn = useSelector((state) => state.signedIn);
   const [passwordVisibility, setPasswordVisibility] = useState(false);
   const [cnfPasswordVisibility, setCnfPasswordVisibility] = useState(false);
 
@@ -39,6 +40,7 @@ const SignUp = () => {
     if (name && email && phone && password && cnfPassword) {
       setDisabled(false);
     }
+    console.log("sign up: ", signedIn);
   }, [name, email, phone, password, cnfPassword]);
 
   // Function: To handle form submit action.
@@ -94,7 +96,7 @@ const SignUp = () => {
                   inpId={"name"}
                   inpType={"text"}
                   inpName={"namel"}
-                  inpFocus={"true"}
+                  inpFocus={true}
                   inpAutoComplete={"name"}
                   inpPlaceholder={"John Doe"}
                   inpClass={"signup-inp name"}
