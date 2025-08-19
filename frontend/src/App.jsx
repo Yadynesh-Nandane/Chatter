@@ -1,29 +1,23 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import ProtectedRouutes from "./utils/ProtectedRoutes.jsx";
 
+import { useEffect } from "react";
 import Home from "./pages/Home/Home.jsx";
+import { useDispatch } from "react-redux";
 import SignUp from "./pages/SignUp/SignUp.jsx";
 import SignIn from "./pages/SignIn/SignIn.jsx";
-import { axiosInstance } from "./utils/axios.js";
+import { checkAuth } from "./utils/authSlice.js";
 import Navbar from "./components/Navbar/Navbar.jsx";
-import { signedInSlice } from "./utils/authSlice.js";
 
 const App = () => {
   const dispatch = useDispatch();
-  const signedIn = useSelector((state) => state.isSignedIn);
-  console.log("app.jsx ", signedIn);
 
   useEffect(() => {
-    (async () => {
-      const res = await axiosInstance.get("/auth/checkauth");
-      dispatch(signedInSlice(res.data));
-    })();
-    console.log("is signed in: ", signedIn);
-  }, [signedIn, dispatch]);
+    dispatch(checkAuth());
+  }, [dispatch]);
+  // const isSignedIn = useSelector((state) => state.auth?.isSignedIn);
 
   return (
     <>
@@ -35,7 +29,7 @@ const App = () => {
 
           <Route element={<ProtectedRouutes />}>
             <Route path="/" element={<Home />} />
-            <Route path="/home" element={<Home />} />
+            {/* <Route path="/home" element={<Home />} /> */}
           </Route>
         </Routes>
       </div>

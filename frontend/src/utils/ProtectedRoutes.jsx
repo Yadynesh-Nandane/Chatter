@@ -1,13 +1,20 @@
-// import { axiosInstance } from "./axios";
-// import { signedInSlice } from "./authSlice";
 import { useSelector } from "react-redux";
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
 
 const ProtectedRoutes = () => {
-  const issignedin = useSelector((state) => state.isSignedin);
-  console.log("protected route is signed in: ", issignedin);
+  // const dispatch = useDispatch();
+  const location = useLocation();
+  const isSignedIn = useSelector((state) => state.auth?.isSignedIn);
 
-  return issignedin ? <Outlet /> : <Navigate to="/signin" />;
+  if (isSignedIn === null) {
+    return <div>Loading...</div>; // You can replace with a spinner component
+  }
+
+  return isSignedIn ? (
+    <Outlet />
+  ) : (
+    <Navigate to="/signin" state={{ from: location }} replace />
+  );
 };
 
 export default ProtectedRoutes;

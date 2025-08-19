@@ -2,15 +2,10 @@ import "./SignIn.css";
 import chat from "../../assets/chat2.gif";
 import okay from "../../assets/icons8-ok.gif";
 
-import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import {
-  FaEye,
-  FaLock,
-  FaEyeSlash,
-  FaEnvelope,
-} from "react-icons/fa6";
-import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { FaEye, FaLock, FaEyeSlash, FaEnvelope } from "react-icons/fa6";
 
 import { axiosInstance } from "../../utils/axios";
 import { signedInSlice } from "../../utils/authSlice";
@@ -21,19 +16,24 @@ import CustomButton from "../../components/CustomButton/CustomButton";
 const SignIn = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [disabled, setDisabled] = useState(true);
+  const isSignedin = useSelector((state) => state.auth.isSignedIn);
   const [passwordVisibility, setPasswordVisibility] = useState(false);
 
   // React built in hook.
   useEffect(() => {
+    if (isSignedin) {
+      navigate(location.state?.from || "/", { replace: true });
+    }
     if (email && password) {
       setDisabled(false);
     }
-  }, [email, password]);
+  }, [email, password, isSignedin, location, navigate]);
 
   // Function: To handle form submit action.
   const onClickHandler = async (e) => {

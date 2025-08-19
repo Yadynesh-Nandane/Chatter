@@ -2,8 +2,8 @@ import "./SignUp.css";
 import chat from "../../assets/chat2.gif";
 import okay from "../../assets/icons8-ok.gif";
 
-import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   FaEye,
   FaLock,
@@ -12,7 +12,7 @@ import {
   FaCircleUser,
   FaMobileButton,
 } from "react-icons/fa6";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 import { axiosInstance } from "../../utils/axios";
 import { signedInSlice } from "../../utils/authSlice";
@@ -23,6 +23,7 @@ import CustomButton from "../../components/CustomButton/CustomButton";
 const SignUp = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -31,17 +32,28 @@ const SignUp = () => {
   const [success, setSuccess] = useState(false);
   const [disabled, setDisabled] = useState(true);
   const [cnfPassword, setCnfPassword] = useState("");
-  const signedIn = useSelector((state) => state.signedIn);
+  const isSignedin = useSelector((state) => state.auth.isSignedIn);
   const [passwordVisibility, setPasswordVisibility] = useState(false);
   const [cnfPasswordVisibility, setCnfPasswordVisibility] = useState(false);
 
   // React built in hook.
   useEffect(() => {
+    if (isSignedin) {
+      navigate(location.state?.form || "/", { replace: true });
+    }
     if (name && email && phone && password && cnfPassword) {
       setDisabled(false);
     }
-    console.log("sign up: ", signedIn);
-  }, [name, email, phone, password, cnfPassword]);
+  }, [
+    name,
+    email,
+    phone,
+    password,
+    cnfPassword,
+    navigate,
+    location,
+    isSignedin,
+  ]);
 
   // Function: To handle form submit action.
   const onClickHandler = async (e) => {
