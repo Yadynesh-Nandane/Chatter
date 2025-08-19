@@ -1,0 +1,134 @@
+.signin-container {
+  width: 100%;
+  height: 100%;
+  padding: 6rem;
+}
+
+.signin-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  overflow: hidden;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 16px;
+  justify-content: center;
+  border: 1px solid #0c0f0a;
+}
+
+.animation-container {
+  width: 50%;
+  height: 100%;
+  border-right: 1px solid #0c0f0a;
+}
+
+.signin-animation {
+  width: 100%;
+  height: 100%;
+}
+
+.success-animation-container {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid #0c0f0a;
+}
+
+.signin-success-animation {
+  width: 20%;
+}
+
+.form-container {
+  width: 50%;
+  height: 100%;
+  padding: 2rem;
+  background-color: #ffffff;
+}
+
+.signin-form-heading-container {
+  width: 100%;
+  height: 7%;
+}
+
+.signin-form-heading {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  font-size: 26px;
+  font-weight: 800;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  font-family: "Open Sans", sans-serif;
+}
+
+.signin-form {
+  width: 100%;
+  height: 100%;
+  padding: 4rem;
+}
+
+.signin-icon-container-before {
+  width: 9%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px 0 0 6px;
+  background-color: #e1e1e1;
+}
+
+.signin-inp-container {
+  width: 100%;
+  height: 3em;
+  display: flex;
+  margin-top: 4rem;
+  flex-direction: row;
+}
+
+.signin-inp-container:nth-child(1) {
+  margin-top: 0;
+}
+
+.name,
+.email,
+.phone {
+  border-radius: 0 6px 6px 0;
+}
+
+.signin-icon {
+  font-size: 18px;
+}
+
+.signin-icon-container-after {
+  width: 9%;
+  display: flex;
+  padding-right: 1rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0 6px 6px 0;
+  background-color: #e1e1e1;
+}
+
+.signin-btn-container {
+  width: 100%;
+  height: 3em;
+  margin: 4rem 0;
+  border-radius: 16px;
+  margin-bottom: 2.3rem;
+}
+
+.signup-page-link,
+.forgetpassword-page-link {
+  color: #0866ff;
+  text-decoration: none;
+}
+
+.signup-link:hover {
+  color: #ff206e;
+}
+
+.signup-links {
+  margin-top: 0.7rem;
+}

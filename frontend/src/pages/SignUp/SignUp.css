@@ -15,13 +15,13 @@
   align-items: center;
   border-radius: 16px;
   justify-content: center;
-  border: 1px solid #0C0F0A;
+  border: 1px solid #0c0f0a;
 }
 
 .animation-container {
   width: 50%;
   height: 100%;
-  border-right: 1px solid #0C0F0A;
+  border-right: 1px solid #0c0f0a;
 }
 
 .signup-animation {
@@ -35,7 +35,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-right: 1px solid #0C0F0A;
+  border-right: 1px solid #0c0f0a;
 }
 
 .signup-success-animation {
@@ -47,7 +47,7 @@
   width: 50%;
   height: 100%;
   padding: 2rem;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
 }
 
 .signup-form-heading-container {
@@ -71,7 +71,7 @@
 .signup-form {
   width: 100%;
   height: 100%;
-  padding: 1rem 4rem;
+  padding: 0 4rem;
   /* background-color: red; */
 }
 
@@ -79,11 +79,41 @@
   margin: 1rem 0;
 } */
 
+.signup-icon-container-before {
+  width: 9%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px 0 0 6px;
+  background-color: #E1E1E1;
+}
+
 .signup-inp-container {
   width: 100%;
   height: 3em;
+  display: flex;
   margin-top: 2rem;
-  /* background-color: pink; */
+  flex-direction: row;
+}
+
+.name,
+.email,
+.phone {
+  border-radius: 0 6px 6px 0;
+}
+
+.signup-icon {
+  font-size: 18px;
+}
+
+.signup-icon-container-after {
+  width: 9%;
+  display: flex;
+  padding-right: 1rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0 6px 6px 0;
+  background-color: #E1E1E1;
 }
 
 .signup-btn-container {
@@ -96,14 +126,10 @@
 .signin-page-link,
 .forget-password-link {
   /* color: #FF206E; */
-  color: #0866FF;
+  color: #0866ff;
   text-decoration: none;
 }
 
-.signup-links {
-  margin-top: 0.5rem;
-}
-
 .signup-link:hover {
-  color: #FF206E;
+  color: #ff206e;
 }
