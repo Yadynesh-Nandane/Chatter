@@ -48,6 +48,12 @@
   height: 93vh;
   padding: 0 1.5rem;
   /* background-color: #dadada; */
-  background-color: #E1E1E1;
+  background-color: #e1e1e1;
   /* background-color: #FFFFFF; */
+}
+
+.fullscreen-main-wrapper-container {
+  width: 100%;
+  height: 100vh;
+  background-color: #e1e1e1;
 }

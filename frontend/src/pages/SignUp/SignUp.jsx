@@ -228,3 +228,5 @@ const SignUp = () => {
 };
 
 export default SignUp;
+
+{/* <a href="https://storyset.com/online">Online illustrations by Storyset</a> */}
