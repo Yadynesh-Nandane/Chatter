@@ -10,7 +10,7 @@
 }
 
 .sidebar-logo-container {
-  height: 6%;
+  height: 30px;
   display: flex;
   padding: 0 1rem;
   align-items: center;
@@ -61,11 +61,11 @@
   cursor: pointer;
   flex-direction: row;
   align-items: center;
-  transition: background 0.3s;
+  transition: color 0.3s ease;
 }
 
 .side-menu-item-wrapper:hover {
-  /* background-color: red; */
+  color: #ff206e;
 }
 
 .side-menu-item-icon-wrapper {
