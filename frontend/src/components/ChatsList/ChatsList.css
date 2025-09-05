@@ -1,5 +1,118 @@
 .chatsList-main-container {
   width: 30%;
   height: 100%;
+  border-right: 1px solid #000000;
+  /* background-color: red; */
+}
+
+.chatsList-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+.chatlist-heading-container {
+  display: flex;
+  padding-right: 1rem;
+  flex-direction: row;
+  padding-bottom: 1rem;
+  justify-content: space-between;
+  /* border-bottom: 1px solid #000000; */
+}
+
+.chatlist-heading {
+  padding: 0 1rem;
+  font-size: 26px;
+  font-weight: 900;
+  padding-top: 0.1rem;
+  text-transform: uppercase;
+}
+
+.chatlist-heading-submenu-container {
+  width: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: red;
+}
+
+.submenu-icon {
+  font-size: 26px;
+  font-weight: 900;
+  position: relative;
+}
+
+.submenu-container {
+  top: 2rem;
+  padding: 0.8rem;
+  position: absolute;
+  visibility: hidden;
+}
+
+.submenu-logoutBtn {
+  padding: 1rem;
+}
+
+.chatlist-heading-submenu-container:hover > .submenu-container {
+  display: block;
+  cursor: pointer;
+  visibility: visible;
+}
+
+.chatList-nav-links {
+  color: #000000;
+  text-decoration: none;
+}
+
+.chatlist-item-container {
+  display: flex;
+  /* margin-bottom: 1rem; */
+  flex-direction: row;
+  /* border1   25q  A#-bottom: 1px solid #000000; */
+}
+
+.chat-item-wrapper {
+  width: 100%;
+  padding: 1rem;
+}
+
+.chat-label-container {
+  width: 100%;
+  /* background-color: greenyellow; */
+}
+
+.chat-label {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.chat-message-container {
+  width: 100%;
+}
+
+.chat-message {
+  font-size: 16px;
+  color: #747171;
+}
+
+.chatMessage-count-container {
+  width: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chatMessage-count-circle {
+  width: 70%;
+  height: 35%;
+  display: flex;
+  padding: 1rem;
+  align-items: center;
+  border-radius: 100%;
+  justify-content: center;
+  background-color: red;
+}
+
+.chatMessage-count {
+  font-size: 16px;
+  font-weight: 900;
 }

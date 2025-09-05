@@ -1,9 +1,10 @@
 import "./Sidebar.css";
-import { FaCircleUser, FaGear, FaUsers } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
+import { FaCircleUser, FaGear, FaUsers } from "react-icons/fa6";
 
 const menuItems = [
-  { label: "Emplore", icon: FaSearch },
+  { label: "Explore", icon: FaSearch },
   { label: "Friends", icon: FaUsers },
   { label: "Profile", icon: FaCircleUser },
   { label: "Settings", icon: FaGear },
@@ -23,14 +24,20 @@ const Sidebar = () => {
       {menuItems.map((itemName, index) => {
         const Icon = itemName.icon;
         return (
-          <div className="side-menu-item-wrapper" key={index}>
-            <div className="side-menu-item-icon-wrapper">
-              <Icon className="side-menu-item-icon" />
+          <Link
+            to={`/${itemName.label.toLowerCase()}`}
+            className="sidebar-nav-links"
+            key={index}
+          >
+            <div className="side-menu-item-wrapper">
+              <div className="side-menu-item-icon-wrapper">
+                <Icon className="side-menu-item-icon" />
+              </div>
+              <div className="side-menu-item">
+                <p className="item">{itemName.label}</p>
+              </div>
             </div>
-            <div className="side-menu-item">
-              <p className="item">{itemName.label}</p>
-            </div>
-          </div>
+          </Link>
         );
       })}
     </div>

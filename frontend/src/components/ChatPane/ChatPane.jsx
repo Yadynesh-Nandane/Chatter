@@ -1,9 +1,18 @@
-import React from 'react'
+import './ChatPane.css';
+import { useParams } from "react-router-dom";
 
 const ChatPane = () => {
-  return (
-    <div>ChatPane</div>
-  )
-}
+  const { id } = useParams();
 
-export default ChatPane
+  return (
+    <div className="chatpane-container">
+      {id ? (
+        <p className="renderingMessage">Hi chat with chat id: {id}</p>
+      ) : (
+        <p className="renderingMessage">Select a chat to start chatting!!!</p>
+      )}
+    </div>
+  );
+};
+
+export default ChatPane;

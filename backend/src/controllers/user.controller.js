@@ -28,7 +28,7 @@ export const getAllFriends = async (req, res) => {
     // INFO: Populate function fetchs details of all the ids present in friends field
     // INFO: exec() function returns a true promise
     const usersFriends = await User.findById(userId)
-      .populate("friends", "name email phone friends")
+      .populate("friends", "-password")
       .exec();
 
     if (!usersFriends || usersFriends.friends.length == 0) {
