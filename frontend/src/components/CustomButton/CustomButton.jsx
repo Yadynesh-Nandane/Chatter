@@ -5,8 +5,8 @@ const CustomButton = ({
   btnText,
   btnType,
   onClick,
-  disabled = "true",
-  loading = "false",
+  disabled = true,
+  loading = false,
 }) => {
   return (
     <div className="btn-container">

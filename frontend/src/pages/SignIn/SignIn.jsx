@@ -31,7 +31,7 @@ const SignIn = () => {
       navigate(location.state?.from || "/", { replace: true });
     }
     if (email && password) {
-      setDisabled(false);
+      setDisabled(false);   
     }
   }, [email, password, isSignedin, location, navigate]);
 
@@ -44,15 +44,24 @@ const SignIn = () => {
         email,
         password,
       };
-      axiosInstance.post("/auth/signin", data).then((response) => {
-        setSuccess(true);
-        dispatch(signedInSlice(response.data));
-        setTimeout(() => {
-          setSuccess(false);
-          navigate("/");
-        }, 1000);
-        console.log("Axios response: ", response);
-      });
+      axiosInstance
+        .post("/auth/signin", data)
+        .then((response) => {
+          setSuccess(true);
+          dispatch(signedInSlice(response.data));
+          setTimeout(() => {
+            setSuccess(false);
+            navigate("/");
+          }, 1000);
+          console.log("Axios response: ", response);
+        })
+        .catch((error) => {
+          setEmail("");
+          setPassword("");
+          setLoading(false);
+          console.log(error.response.data.message);
+          alert(error.response.data.message);
+        });
     } catch (error) {
       console.error("error occured while signing up: ", error);
     }
@@ -83,6 +92,7 @@ const SignIn = () => {
                   <FaEnvelope className="signin-icon email-icon" />
                 </div>
                 <CustomInput
+                  value={email}
                   inpId={"email"}
                   inpType={"email"}
                   inpName={"email"}
@@ -100,6 +110,7 @@ const SignIn = () => {
                   <FaLock className="signin-icon password-icon" />
                 </div>
                 <CustomInput
+                  value={password}
                   inpId={"password"}
                   inpName={"password"}
                   inpPlaceholder={"********"}
