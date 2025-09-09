@@ -50,7 +50,9 @@ const App = () => {
             <Route element={<Layout />}>
               <Route path="/" element={<Explore />} />
               <Route path="/explore" element={<Explore />} />
-              <Route path="/profile" element={<Profile />} />
+              <Route path="/profile" element={<Profile />}>
+                
+              </Route>
               <Route path="/settings" element={<Settings />} />
               <Route path="friends" element={<Chat />}>
                 <Route index element={<ChatsList />} />
