@@ -66,15 +66,27 @@ const SignUp = () => {
         phone,
         password,
       };
-      axiosInstance.post("/auth/signup", data).then((response) => {
-        setSuccess(true);
-        dispatch(signedInSlice(response.data));
-        setTimeout(() => {
-          setSuccess(false);
-          navigate("/");
-        }, 1000);
-        console.log("Axios response: ", response);
-      });
+      axiosInstance
+        .post("/auth/signup", data)
+        .then((response) => {
+          setSuccess(true);
+          dispatch(signedInSlice(response.data));
+          setTimeout(() => {
+            setSuccess(false);
+            navigate("/");
+          }, 1000);
+          console.log("Axios response: ", response);
+        })
+        .catch((error) => {
+          setName("");
+          setPhone("");
+          setEmail("");
+          setPassword("");
+          setLoading(false);
+          setCnfPassword("");
+          console.log(error.response.data.message);
+          alert(error.response.data.message);
+        });
     } catch (error) {
       console.error("error occured while signing up: ", error);
     }
@@ -229,4 +241,6 @@ const SignUp = () => {
 
 export default SignUp;
 
-{/* <a href="https://storyset.com/online">Online illustrations by Storyset</a> */}
+{
+  /* <a href="https://storyset.com/online">Online illustrations by Storyset</a> */
+}

@@ -63,7 +63,7 @@ const ChatsList = () => {
         {friendsList.map((friend, index) => {
           return (
             <Link
-              to={`/friends/${friend.id}`}
+              to={`/friends/${friend._id}`}
               className="chatList-nav-links"
               key={index}
             >
