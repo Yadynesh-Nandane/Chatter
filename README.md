@@ -1,7 +1,3 @@
-Sure! Here's a professional and comprehensive `README.md` for a chat application named **Chatter**, developed using the **MERN stack (MongoDB, Express.js, React, Node.js)**:
-
----
-
 # 🗨️ Chatter - Real-Time Chat Application
 
 Chatter is a full-featured real-time chat application built with the MERN stack. It supports individual and group chats, real-time messaging using WebSockets (via Socket.IO), user authentication, and responsive design for mobile and desktop users.
@@ -17,7 +13,8 @@ Chatter is a full-featured real-time chat application built with the MERN stack.
 - 💬 **Real-Time Messaging**
 
   - Instant messaging using Socket.IO.
-<!-- 
+  <!--
+
 - 👥 **Private & Group Chats**
 
   - Create group chats, rename them, and manage users. -->
@@ -133,7 +130,8 @@ npm start
 | GET    | /api/message/\:chatId | Get messages from a chat               |
 
 ---
-<!-- 
+
+<!--
 ## 📸 Screenshots
 
 > _(Add screenshots of the login page, chat window, group creation modal, etc.)_
@@ -159,7 +157,8 @@ You can deploy Chatter using:
 5. Create a Pull Request
 
 ---
-<!-- 
+
+<!--
 ## 📃 License
 
 This project is licensed under the MIT License.
