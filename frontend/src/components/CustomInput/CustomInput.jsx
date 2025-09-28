@@ -1,6 +1,7 @@
 import "./CustomInput.css";
 
 const CustomInput = ({
+  value,
   inpId,
   inpType,
   inpName,
@@ -16,6 +17,7 @@ const CustomInput = ({
         id={inpId}
         type={inpType}
         name={inpName}
+        value={value}
         onChange={onChange}
         autoFocus={inpFocus}
         className={inpClass}
