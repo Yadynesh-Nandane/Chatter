@@ -1,6 +1,6 @@
 import "./SignIn.css";
 import chat from "../../assets/chat2.gif";
-import okay from "../../assets/icons8-ok.gif";
+// import okay from "../../assets/icons8-ok.gif";
 
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,6 +12,7 @@ import { signedInSlice } from "../../utils/authSlice";
 
 import CustomInput from "../../components/CustomInput/CustomInput";
 import CustomButton from "../../components/CustomButton/CustomButton";
+import { toast } from "sonner";
 
 const SignIn = () => {
   const dispatch = useDispatch();
@@ -20,7 +21,7 @@ const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
+  // const [success, setSuccess] = useState(false);
   const [disabled, setDisabled] = useState(true);
   const isSignedin = useSelector((state) => state.auth.isSignedIn);
   const [passwordVisibility, setPasswordVisibility] = useState(false);
@@ -31,7 +32,7 @@ const SignIn = () => {
       navigate(location.state?.from || "/", { replace: true });
     }
     if (email && password) {
-      setDisabled(false);   
+      setDisabled(false);
     }
   }, [email, password, isSignedin, location, navigate]);
 
@@ -47,10 +48,11 @@ const SignIn = () => {
       axiosInstance
         .post("/auth/signin", data)
         .then((response) => {
-          setSuccess(true);
+          // setSuccess(true);
+          toast.success("Signed In Successfully!");
           dispatch(signedInSlice(response.data));
           setTimeout(() => {
-            setSuccess(false);
+            // setSuccess(false);
             navigate("/");
           }, 1000);
           console.log("Axios response: ", response);
@@ -59,11 +61,12 @@ const SignIn = () => {
           setEmail("");
           setPassword("");
           setLoading(false);
-          console.log(error.response.data.message);
-          alert(error.response.data.message);
+          console.log("Error signing in: ", error);
+          toast.error(error.response.data.message);
         });
     } catch (error) {
       console.error("error occured while signing up: ", error);
+      toast.error(error.message);
     }
   };
 
@@ -73,92 +76,82 @@ const SignIn = () => {
         <div className="animation-container">
           <img className="signin-animation" src={chat} alt="Chatter" />
         </div>
-        {success ? (
-          <div className="success-animation-container">
-            <img
-              className="signin-success-animation"
-              src={okay}
-              alt="Success"
-            />
+        <div className="form-container">
+          <div className="signin-form-heading-container">
+            <h1 className="signin-form-heading">Sign In</h1>
           </div>
-        ) : (
-          <div className="form-container">
-            <div className="signin-form-heading-container">
-              <h1 className="signin-form-heading">Sign In</h1>
+          <form className="signin-form">
+            <div className="signin-inp-container">
+              <div className="signin-icon-container-before">
+                <FaEnvelope className="signin-icon email-icon" />
+              </div>
+              <CustomInput
+                value={email}
+                inpId={"email"}
+                inpType={"email"}
+                inpName={"email"}
+                inpFocus={true}
+                inpAutoComplete={"username"}
+                inpClass={"signin-inp email"}
+                inpPlaceholder={"johndoe@xyz.com"}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
+              />
             </div>
-            <form className="signin-form">
-              <div className="signin-inp-container">
-                <div className="signin-icon-container-before">
-                  <FaEnvelope className="signin-icon email-icon" />
-                </div>
-                <CustomInput
-                  value={email}
-                  inpId={"email"}
-                  inpType={"email"}
-                  inpName={"email"}
-                  inpFocus={true}
-                  inpAutoComplete={"username"}
-                  inpClass={"signin-inp email"}
-                  inpPlaceholder={"johndoe@xyz.com"}
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                  }}
-                />
+            <div className="signin-inp-container">
+              <div className="signin-icon-container-before">
+                <FaLock className="signin-icon password-icon" />
               </div>
-              <div className="signin-inp-container">
-                <div className="signin-icon-container-before">
-                  <FaLock className="signin-icon password-icon" />
-                </div>
-                <CustomInput
-                  value={password}
-                  inpId={"password"}
-                  inpName={"password"}
-                  inpPlaceholder={"********"}
-                  inpAutoComplete={"new-password"}
-                  inpClass={"signin-inp password"}
-                  onChange={(e) => {
-                    setPassword(e.target.value);
-                  }}
-                  inpType={passwordVisibility ? "text" : "password"}
-                />
-                <div
-                  className="signin-icon-container-after"
-                  onClick={() => setPasswordVisibility(!passwordVisibility)}
-                >
-                  {passwordVisibility ? (
-                    <FaEyeSlash className="signin-icon passvisibility-icon" />
-                  ) : (
-                    <FaEye className="signin-icon passvisibility-icon" />
-                  )}
-                </div>
+              <CustomInput
+                value={password}
+                inpId={"password"}
+                inpName={"password"}
+                inpPlaceholder={"********"}
+                inpAutoComplete={"new-password"}
+                inpClass={"signin-inp password"}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+                inpType={passwordVisibility ? "text" : "password"}
+              />
+              <div
+                className="signin-icon-container-after"
+                onClick={() => setPasswordVisibility(!passwordVisibility)}
+              >
+                {passwordVisibility ? (
+                  <FaEyeSlash className="signin-icon passvisibility-icon" />
+                ) : (
+                  <FaEye className="signin-icon passvisibility-icon" />
+                )}
               </div>
-              <div className="signin-btn-container">
-                <CustomButton
-                  loading={loading}
-                  disabled={disabled}
-                  btnType={"submit"}
-                  btnText={"Sign In"}
-                  onClick={onClickHandler}
-                  btnClass={"btn-signin-submit"}
-                />
-              </div>
-              <p className="signup-links">
-                <Link
-                  className="signup-link forgetpassword-page-link"
-                  to="/forgetpassword"
-                >
-                  Forget Password?
-                </Link>
-              </p>
-              <p className="signup-links">
-                New User?{" "}
-                <Link className="signup-link signup-page-link" to="/signup">
-                  Sign Up
-                </Link>
-              </p>
-            </form>
-          </div>
-        )}
+            </div>
+            <div className="signin-btn-container">
+              <CustomButton
+                loading={loading}
+                disabled={disabled}
+                btnType={"submit"}
+                btnText={"Sign In"}
+                onClick={onClickHandler}
+                btnClass={"btn-signin-submit"}
+              />
+            </div>
+            <p className="signup-links">
+              <Link
+                className="signup-link forgetpassword-page-link"
+                to="/forgetpassword"
+              >
+                Forget Password?
+              </Link>
+            </p>
+            <p className="signup-links">
+              New User?{" "}
+              <Link className="signup-link signup-page-link" to="/signup">
+                Sign Up
+              </Link>
+            </p>
+          </form>
+        </div>
       </div>
     </div>
   );

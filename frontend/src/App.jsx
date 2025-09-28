@@ -1,5 +1,6 @@
 import "./App.css";
 import { useEffect } from "react";
+import { Toaster } from "sonner";
 import { useDispatch } from "react-redux";
 import { Routes, Route, useLocation } from "react-router-dom";
 
@@ -14,10 +15,11 @@ import SignUp from "./pages/SignUp/SignUp.jsx";
 import SignIn from "./pages/SignIn/SignIn.jsx";
 import Explore from "./pages/Explore/Explore.jsx";
 import Profile from "./pages/Profile/Profile.jsx";
+import Landing from "./pages/Landing/Landing.jsx";
+import Settings from "./pages/Settings/Settings.jsx";
 import Notfound from "./pages/NotFound/Notfound.jsx";
 import ChatPane from "./components/ChatPane/ChatPane.jsx";
 import ChatsList from "./components/ChatsList/ChatsList.jsx";
-import Settings from "./pages/Settings/Settings.jsx";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -31,6 +33,7 @@ const App = () => {
 
   return (
     <>
+      <Toaster richColors />
       {pathname === "/signin" || pathname === "/signup" ? <Navbar /> : ""}
       {/* <Navbar /> */}
       <div
@@ -42,17 +45,15 @@ const App = () => {
       >
         <Routes>
           {/* Public Routes */}
+          <Route path="/" element={<Landing />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signin" element={<SignIn />} />
 
           {/* Protected Routes */}
           <Route element={<ProtectedRoutes />}>
             <Route element={<Layout />}>
-              <Route path="/" element={<Explore />} />
               <Route path="/explore" element={<Explore />} />
-              <Route path="/profile" element={<Profile />}>
-                
-              </Route>
+              <Route path="/profile/:id" element={<Profile />}></Route>
               <Route path="/settings" element={<Settings />} />
               <Route path="friends" element={<Chat />}>
                 <Route index element={<ChatsList />} />

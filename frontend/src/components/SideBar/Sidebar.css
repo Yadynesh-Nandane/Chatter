@@ -1,9 +1,11 @@
 .sidebar-main-container {
+  top: 0;
   width: 58px;
   height: 100%;
   position: sticky;
   transition: width 0.7s ease;
-  background-color: #e1e1e1;
+  /* background-color: #e1e1e1 !important; */
+  background-color: #FFFFFF !important;
 }
 
 .sidebar-main-container:hover {
@@ -13,7 +15,7 @@
 .sidebar-logo-container {
   height: 30px;
   display: flex;
-  padding: 0 1rem;
+  /* padding: 0 1rem; */
   margin-bottom: 2rem;
   align-items: center;
 }
@@ -22,6 +24,7 @@
   opacity: 1;
   display: flex;
   min-width: 30px;
+  padding: 0 1.4rem;
   visibility: visible;
   align-items: center;
   justify-content: center;
@@ -41,12 +44,17 @@
   transition: opacity 0.5s;
 }
 
+.sidebar-logo-label {
+  text-align: left;
+}
+
 .sidebar-main-container:hover .sidebar-logo-label-container {
   opacity: 1;
 }
 
 .sidebar-main-container:hover .sidebar-logo-wrapper {
   opacity: 0;
+  display: none;
   min-width: 0px;
   visibility: hidden;
 }

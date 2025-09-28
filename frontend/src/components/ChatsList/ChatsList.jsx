@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { axiosInstance } from "../../utils/axios.js";
 import CustomButton from "../CustomButton/CustomButton.jsx";
 import { useState } from "react";
+import { toast } from "sonner";
 
 // Demo Friends List for testing purpose
 // const chatsList = [
@@ -27,6 +28,7 @@ const ChatsList = () => {
       navigate({ to: "/signin" });
     }
     console.log("logout result: ", result);
+    toast.success("Signed Out Successfully");
   };
 
   useEffect(() => {
@@ -35,14 +37,20 @@ const ChatsList = () => {
       console.log("get all friends response: ", responce);
       setFriendsList(responce.data.friends);
     })();
-  }, []);
+  }, [user]);
+
+  if (!user) {
+    return <div className="loadingContent">Loading Chats List...</div>;
+  }
 
   return (
     <div className="chatsList-main-container">
       <div className="chatsList-wrapper">
         <div className="chatlist-heading-container">
           <div className="chat-heading-wrapper">
-            <h3 className="chatlist-heading">{user.name}</h3>
+            <h3 className="chatlist-heading">
+              {user ? user.name : "Loading..."}
+            </h3>
           </div>
           <div className="chatlist-heading-submenu-container">
             <BsThreeDotsVertical className="submenu-icon" />
