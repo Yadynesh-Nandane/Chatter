@@ -1,0 +1,135 @@
+.signup-container {
+  width: 100%;
+  height: 100%;
+  padding: 6rem;
+  /* background-color: #FFFFFF; */
+  /* background-color: #E1E1E1; */
+}
+
+.signup-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  overflow: hidden;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 16px;
+  justify-content: center;
+  border: 1px solid #0c0f0a;
+}
+
+.animation-container {
+  width: 50%;
+  height: 100%;
+  border-right: 1px solid #0c0f0a;
+}
+
+.signup-animation {
+  width: 100%;
+  height: 100%;
+}
+
+.success-animation-container {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid #0c0f0a;
+}
+
+.signup-success-animation {
+  width: 20%;
+  /* height: 40%; */
+}
+
+.form-container {
+  width: 50%;
+  height: 100%;
+  padding: 2rem;
+  background-color: #ffffff;
+}
+
+.signup-form-heading-container {
+  width: 100%;
+  height: 7%;
+}
+
+.signup-form-heading {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  font-size: 26px;
+  font-weight: 800;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  /* background-color: green; */
+  font-family: "Open Sans", sans-serif;
+}
+
+.signup-form {
+  width: 100%;
+  height: 100%;
+  padding: 0 4rem;
+  /* background-color: red; */
+}
+
+/* .signup-inp {
+  margin: 1rem 0;
+} */
+
+.signup-icon-container-before {
+  width: 9%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px 0 0 6px;
+  background-color: #E1E1E1;
+}
+
+.signup-inp-container {
+  width: 100%;
+  height: 3em;
+  display: flex;
+  margin-top: 2rem;
+  flex-direction: row;
+}
+
+.name,
+.email,
+.phone {
+  border-radius: 0 6px 6px 0;
+}
+
+.signup-icon {
+  font-size: 18px;
+}
+
+.signup-icon-container-after {
+  width: 9%;
+  display: flex;
+  padding-right: 1rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0 6px 6px 0;
+  background-color: #E1E1E1;
+}
+
+.signup-btn-container {
+  width: 100%;
+  height: 3em;
+  border-radius: 16px;
+  margin: 2rem 0;
+}
+
+.signin-page-link,
+.forget-password-link {
+  /* color: #FF206E; */
+  color: #0866ff;
+  text-decoration: none;
+}
+
+.signup-link:hover {
+  color: #ff206e;
+}
