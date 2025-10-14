@@ -1,0 +1,279 @@
+/* @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"); */
+/* @import url("https://db.onlinewebfonts.com/c/1d616465837482e4ee7af783bdb01e4c?family=Flix+W90+Regular"); */
+@import url("https://db.onlinewebfonts.com/c/821de48f4b9ca66fa33a22103fcb63f8?family=Roundor");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+.landing-main-container {
+  width: 100%;
+  height: 100%;
+}
+
+.landing-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+.home-container {
+  width: 100%;
+  height: 100%;
+}
+
+.home-wrapper {
+  width: 100%;
+  height: 100%;
+  padding: 1.5rem 3.5rem 0;
+}
+
+.background-shape-wrapper {
+  width: 100%;
+  z-index: 1;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.shape-container {
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  z-index: -1;
+  position: absolute;
+  border-radius: 100% 0% 0% 100% / 65% 22% 68% 35%;
+  background: linear-gradient(to right, #ff206e, #ff9eb5);
+}
+
+.header-container {
+  width: 100%;
+  height: 2rem;
+  display: flex;
+  z-index: 1000;
+  position: sticky;
+  justify-content: space-between;
+}
+
+.logo-container {
+  width: 7%;
+  display: flex;
+  align-items: center;
+}
+
+.landing-logo-link {
+  color: #000000;
+  text-decoration: none;
+}
+
+.landing-logo {
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.nav-menu-container {
+  width: 25%;
+  border-radius: 20rem;
+  background-color: rgba(252, 252, 252, 0.5);
+}
+
+.landing-nav-menu > ul {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  list-style: none;
+  align-items: center;
+  justify-content: space-evenly;
+  /* background-color: rgba(252, 252, 252, 0.5); */
+}
+
+.landing-nav-menu-li {
+  color: #000000;
+  text-decoration: none;
+}
+
+.landing-nav-link {
+  color: #000000;
+  text-decoration: none;
+}
+
+.landing-nav-link:hover {
+  color: #ff206e;
+}
+
+.signinBtn-container {
+  width: 7%;
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+  border-radius: 2rem;
+  justify-content: center;
+  background-color: #000000;
+  /* background-color: rgba(244, 244, 244, 0.7); */
+}
+
+.signinbtn {
+  width: 100%;
+  height: 100%;
+  color: #ffffff;
+  /* color: #000000; */
+  text-align: center;
+  padding-top: 0.3rem;
+  text-decoration: none;
+}
+
+.signinBtn-container:hover {
+  transition: all 0.2s linear;
+  /* background-color: #ff206e; */
+  /* background-color: #000000; */
+  background-color: rgba(244, 244, 244, 0.7);
+}
+
+.signinBtn-container:hover > .signinbtn {
+  color: #000000;
+  padding-top: 0.3rem;
+  transition: all 0.2s linear;
+}
+
+.landing-heading-wrapper {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  grid-template-columns: 1fr 40%;
+}
+
+.landing-heading-container {
+  width: 100%;
+  height: 100%;
+  padding-top: 9rem;
+}
+
+.landing-heading {
+  width: 95.2%;
+  font-size: 87px;
+  font-weight: 900;
+  line-height: 0.9;
+  font-style: normal;
+  letter-spacing: 6px;
+  font-optical-sizing: auto;
+  font-family: "Roboto Slab", serif;
+  /* font-family: "Poppins", sans-serif; */
+}
+
+.landing-sub-heading {
+  width: 76%;
+  font-size: 20px;
+  color: #444444;
+  margin-top: 0.6rem;
+  letter-spacing: 2px;
+  font-family: "Roboto Slab", serif;
+}
+
+.letsChatBtn {
+  padding: 1rem;
+  display: block;
+  margin: 1.4rem 0;
+  color: #ffffff;
+  /* color: #000000; */
+  width: max-content;
+  border-radius: 1rem;
+  text-decoration: none;
+  background-color: #000000;
+  /* background-color: #999b9c; */
+  font-family: Roboto Mono, sans-serif;
+}
+
+.letsChatBtn:hover {
+  color: #ffffff;
+  background-color: #ff206e;
+  transition: all 0.2s linear;
+}
+
+.chatgif-container {
+  width: 100%;
+  height: 100%;
+}
+
+.chatGif {
+  width: 100%;
+  margin-top: 8rem;
+}
+
+.about-container {
+  width: 100%;
+  height: 100%;
+  background-color: #e1e1e1;
+}
+
+.about-features-wrapper {
+  width: 100%;
+  background-color: #ffffff;
+}
+
+.about-main-heading {
+  width: 100%;
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+  padding: 2rem 0 1rem;
+  font-family: "Poppins";
+  background-color: #ffffff;
+  /* background-color: red; */
+}
+
+.features-benifit-container {
+  height: 100%;
+  display: flex;
+  padding: 3rem 3.5rem 5.5rem;
+  flex-direction: row;
+}
+
+.video-call-feature-wrapper {
+  height: 100%;
+}
+.audio-call-feature-wrapper {
+  height: 100%;
+}
+.messaging-feature-wrapper {
+  height: 100%;
+}
+
+.video-call-feature-wrapper,
+.audio-call-feature-wrapper,
+.messaging-feature-wrapper {
+  display: flex;
+  margin: 0 1rem;
+  flex-direction: row;
+}
+
+.video-call-feature-icon-wrapper,
+.audio-call-feature-icon-wrapper,
+.messaging-feature-icon-wrapper {
+  width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.feature-icon {
+  font-size: 30px;
+}
+
+.video-call-feature-heading,
+.audio-call-feature-heading,
+.messaging-feature-heading {
+  font-weight: 800;
+}
+
+.about-wrapper {
+  width: 100%;
+  padding: 1.5rem 3.5rem 0;
+}
+
+.test {
+  /* font-family: "Flix", serif; */
+  /* font-family: "Roundor", serif; */
+  /* background: linear-gradient(to right, #ff206e, #7f00ff); */
+  /* background: linear-gradient(to right, #ff206e, #ff8c00); */
+  /* background: linear-gradient(to right, #ff206e, #00bfff); */
+  /* background: linear-gradient(to right, #ff206e, #8b0000); */
+}
