@@ -6,6 +6,7 @@ import { connectDB } from "./utils/db.js";
 dotenv.config();
 const app = express();
 
+let handler;
 let isConnected = false;
 
 const ensureDBConnection = async () => {
