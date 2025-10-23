@@ -20,7 +20,7 @@ const ensureDBConnection = async () => {
   }
 };
 
-export default handle = async (req, res) => {
+export default handler = async (req, res) => {
   await ensureDBConnection();
   return app(req, res);
 };
