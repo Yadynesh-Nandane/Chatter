@@ -1,12 +1,9 @@
-// import app from "./app.js";
-import express from "express";
+import app from "./app.js";
 import dotenv from "dotenv";
 import { connectDB } from "./utils/db.js";
 
 dotenv.config();
-const app = express();
 
-let handler;
 let isConnected = false;
 
 const ensureDBConnection = async () => {
@@ -21,7 +18,7 @@ const ensureDBConnection = async () => {
   }
 };
 
-export default handler = async (req, res) => {
+export default async (req, res) => {
   await ensureDBConnection();
   return app(req, res);
 };
