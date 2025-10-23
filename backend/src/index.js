@@ -1,21 +1,26 @@
-import app from "./app.js";
+// import app from "./app.js";
+import express from "express";
+import dotenv from "dotenv";
 import { connectDB } from "./utils/db.js";
 
-// app.listen()
+dotenv.config();
+const app = express();
 
 let isConnected = false;
-const env = process.env.ENV;
-const PORT = process.env.PORT;
 
-// app.listen(PORT, () => {
-//   connectDB();
-//   console.log(`Server running on ${PORT}: http://localhost:5001/`);
-//   console.log(`Server running in ${env} Environment`);
-// });
-
-app.use((req, res, next) => {
-  if (!isConnected) {
-    connectDB();
+const ensureDBConnection = async () => {
+  try {
+    if (!isConnected) {
+      await connectDB();
+      isConnected = true;
+      console.log("Database Connected Successfully!");
+    }
+  } catch (error) {
+    console.error("Database Connection Failed: ", error);
   }
-  next();
-});
+};
+
+export default handle = async (req, res) => {
+  await ensureDBConnection();
+  return app(req, res);
+};

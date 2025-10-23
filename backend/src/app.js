@@ -1,15 +1,15 @@
 import cors from "cors";
-import dotenv from "dotenv";
-import express from "express";
+// import express from "express";
+import app from "./index.js";
 import cookieParser from "cookie-parser";
 
 import authRouter from "./routes/auth.route.js";
 import userRouter from "./routes/user.route.js";
 import messageRouter from "./routes/message.route.js";
 
-dotenv.config();
+// dotenv.config();
 
-const app = express();
+// const app = express();
 
 app.use(
   cors({
@@ -28,4 +28,4 @@ app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
 app.use("/api/message", messageRouter);
 
-export default app;
+// export default app;
