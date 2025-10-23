@@ -4,8 +4,12 @@ import { connectDB } from "./utils/db.js";
 // app.listen()
 
 let isConnected = false;
+<<<<<<< Updated upstream
 const env = process.env.ENV;
 const PORT = process.env.PORT;
+=======
+let handler;
+>>>>>>> Stashed changes
 
 // app.listen(PORT, () => {
 //   connectDB();
