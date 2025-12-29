@@ -240,7 +240,7 @@ const Explore = () => {
             </div>
           </div>
         </div>
-        <div className="home-right-bottom-container">Bottom Container</div>
+        <div className="home-right-bottom-container">Comming Soon</div>
       </div>
     </div>
   );

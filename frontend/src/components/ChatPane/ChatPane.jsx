@@ -1,4 +1,4 @@
-import './ChatPane.css';
+import "./ChatPane.css";
 import { useParams } from "react-router-dom";
 
 const ChatPane = () => {
@@ -7,9 +7,9 @@ const ChatPane = () => {
   return (
     <div className="chatpane-container">
       {id ? (
-        <p className="renderingMessage">Hi chat with chat id: {id}</p>
+        <h1 className="renderingMessage">Chat Feature Comming Soon</h1>
       ) : (
-        <p className="renderingMessage">Select a chat to start chatting!!!</p>
+        <h1 className="renderingMessage">Select a chat to start chatting!!!</h1>
       )}
     </div>
   );
