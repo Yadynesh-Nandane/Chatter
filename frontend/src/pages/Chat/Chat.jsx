@@ -8,7 +8,13 @@ const Chat = () => {
   return (
     <div className="chat-section-container">
       <ChatsList />
-      {id ? <ChatPane /> : <p>Select a chat to start conversation</p>}
+      {id ? (
+        <ChatPane />
+      ) : (
+        <h1 className="chatrenderingMessage">
+          Select a chat to start conversation
+        </h1>
+      )}
     </div>
   );
 };
