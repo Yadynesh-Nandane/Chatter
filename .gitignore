@@ -153,3 +153,4 @@ eslint.config.js
 package-lock.json
 
 ChallengesandErrors.txt
+.vercel

@@ -11,6 +11,7 @@ import Layout from "./components/Layout/Layout.jsx";
 import Navbar from "./components/Navbar/Navbar.jsx";
 
 import Chat from "./pages/Chat/Chat.jsx";
+import About from "./pages/About/About.jsx";
 import SignUp from "./pages/SignUp/SignUp.jsx";
 import SignIn from "./pages/SignIn/SignIn.jsx";
 import Explore from "./pages/Explore/Explore.jsx";
@@ -18,6 +19,7 @@ import Profile from "./pages/Profile/Profile.jsx";
 import Landing from "./pages/Landing/Landing.jsx";
 import Settings from "./pages/Settings/Settings.jsx";
 import Notfound from "./pages/NotFound/Notfound.jsx";
+import Contactus from "./pages/ContactUs/Contactus.jsx";
 import ChatPane from "./components/ChatPane/ChatPane.jsx";
 import ChatsList from "./components/ChatsList/ChatsList.jsx";
 
@@ -46,8 +48,10 @@ const App = () => {
         <Routes>
           {/* Public Routes */}
           <Route path="/" element={<Landing />} />
+          <Route path="/about" element={<About />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signin" element={<SignIn />} />
+          <Route path="/contactus" element={<Contactus />} />
 
           {/* Protected Routes */}
           <Route element={<ProtectedRoutes />}>

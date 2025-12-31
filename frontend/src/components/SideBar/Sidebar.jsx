@@ -18,7 +18,9 @@ const Sidebar = () => {
           <p className="sidebar-logo">C</p>
         </div>
         <div className="sidebar-logo-label-container">
-          <p className="sidebar-logo-label">Chatter</p>
+          <Link to="/" className="sidebar-logo-link">
+            <p className="sidebar-logo-label">Chatter</p>
+          </Link>
         </div>
       </div>
       {menuItems.map((itemName, index) => {
