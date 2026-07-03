@@ -29,7 +29,7 @@ const SignIn = () => {
   // React built in hook.
   useEffect(() => {
     if (isSignedin) {
-      navigate(location.state?.from || "/", { replace: true });
+      navigate(location.state?.from || "/explore", { replace: true });
     }
     if (email && password) {
       setDisabled(false);
@@ -53,7 +53,7 @@ const SignIn = () => {
           dispatch(signedInSlice(response.data));
           setTimeout(() => {
             // setSuccess(false);
-            navigate("/");
+            navigate("/explore");
           }, 1000);
           console.log("Axios response: ", response);
         })

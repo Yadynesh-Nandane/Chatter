@@ -43,3 +43,19 @@ export const getAllFriends = async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
+
+export const getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find().select("name");
+
+    if(!users) {
+      console.log("No users found")
+      res.status(404).json({message: "No users found."});
+    }
+
+    res.status(200).json(users);
+  }
+  catch(error) {
+    console.log("Error while fetching all users: ", error);
+  }
+};
