@@ -1,6 +1,11 @@
 import "./Explore.css";
+import { toast } from "sonner";
+import { io } from "socket.io-client";
 import { Link } from "react-router-dom";
+import { axiosInstance } from "../../utils/axios";
+import { useEffect, useRef, useState, useMemo } from "react";
 
+// Icons imports
 import { FcLike } from "react-icons/fc";
 import { LuImagePlus } from "react-icons/lu";
 import { IoNotifications } from "react-icons/io5";
@@ -8,15 +13,12 @@ import { RiShareForwardLine } from "react-icons/ri";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { FaRegComment, FaSearch, FaChevronUp } from "react-icons/fa";
 
-import postImage1 from "../../assets/postImages/1659029-2560x1080-desktop-dual-screen-nissan-gt-r-background-photo.jpg";
-import postImage2 from "../../assets/postImages/img3.wallspic.com-anime-gojo_satoru-satoru_gojo-anime_art-jujutsu_kaisen-1440x2960.jpg";
-import postImage3 from "../../assets/postImages/satoru-gojo-jujutsu-1440x2560-9292.jpg";
+// Static Images imports
 import postImage4 from "../../assets/postImages/211803.gif";
 import postImage5 from "../../assets/postImages/1758061893064.mp4";
-
-import { toast } from "sonner";
-import { useEffect, useRef, useState } from "react";
-import { axiosInstance } from "../../utils/axios";
+import postImage3 from "../../assets/postImages/satoru-gojo-jujutsu-1440x2560-9292.jpg";
+import postImage1 from "../../assets/postImages/1659029-2560x1080-desktop-dual-screen-nissan-gt-r-background-photo.jpg";
+import postImage2 from "../../assets/postImages/img3.wallspic.com-anime-gojo_satoru-satoru_gojo-anime_art-jujutsu_kaisen-1440x2960.jpg";
 
 const posts = [
   {
@@ -81,70 +83,96 @@ const trendingHashtags = [
   },
 ];
 
-const friendRequests = [
-  {
-    id: "abafedfjkjl",
-    name: "Vishal Raut",
-  },
-  {
-    id: "abafedfjkjl",
-    name: "Alkesh Gaud",
-  },
-  {
-    id: "abafedfjkjl",
-    name: "Rahul Joshi",
-  },
-  {
-    id: "abafedfjkjl",
-    name: "Rajesh Tiwari",
-  },
-];
+// const friendRequests = [
+//   {
+//     id: "abafedfjkjl",
+//     name: "Vishal Raut",
+//   },
+//   {
+//     id: "abafedfjkjl",
+//     name: "Alkesh Gaud",
+//   },
+//   {
+//     id: "abafedfjkjl",
+//     name: "Rahul Joshi",
+//   },
+//   {
+//     id: "abafedfjkjl",
+//     name: "Rajesh Tiwari",
+//   },
+// ];
 
 const Explore = () => {
   const dropDownRef = useRef(null);
   const containerRef = useRef(null);
   const [allusers, setAllUsers] = useState([]);
   const [showButton, setShowButton] = useState(false);
+  const [friendRequests, setFriendRequests] = useState([]);
   const [activeDropdownId, setActiveDropdownId] = useState(null);
+  const socket = useMemo(() => io(import.meta.env.VITE_ENDPOINT_URL), []);
   const [notificationDropdown, setNotificationDropDown] = useState(false);
 
   useEffect(() => {
+    // Immediately Invoked Function (IIF) to fetch all users from mongoddb
     (async () => {
-      const users = await axiosInstance.get("user/allusers");
+      const users = await axiosInstance.get("user/recommendedfriends");
       setAllUsers(users.data);
     })();
 
+    // Function to close dropdown when clicked outside of dropdown area
     const handleOutsideClick = (event) => {
       if (dropDownRef.current && !dropDownRef.current.contains(event.target)) {
         setActiveDropdownId(null);
       }
     };
     document.addEventListener("mousedown", handleOutsideClick);
+
+    // cleanup function :- This function executes everytime when the useEffect execution is completed.
     return () => {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
   }, []);
 
+  // useEffect to handle scroll to top button visibility
   useEffect(() => {
     const container = containerRef.current;
 
+    //function to set visibility of scroll to top/back to top button when the page is scrolled
     const handleScroll = () => {
       setShowButton(container.scrollTop > 300);
     };
 
     container.addEventListener("scroll", handleScroll);
 
+    //cleanup function
     return () => container.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleNotificationDropdown = () => {
+  // useEffect to handle socket connection
+  useEffect(() => {
+    socket.on("connect", () => {
+      console.log(`User Connect ${socket.id}`);
+    });
+  }, []);
+
+  // Function to open and close dropdown when notification icon is hovered
+  const handleNotificationDropdown = async () => {
     setNotificationDropDown(!notificationDropdown);
+    try {
+      const response = await axiosInstance.get("user/allreceivedrequests");
+      setFriendRequests(response.data.message);
+      console.log("Friend requests response: ", friendRequests);
+    } catch (error) {
+      console.log("error while fetching friend requests: ", error.response.data.message);
+    }
   };
 
-  const createPoastHandler = () => {
+  // Function to handle create post click
+  const createPostHandler = () => {
     toast.success("Working....!!!");
   };
 
+  // Function to format number of likes, shares and comments
   const formatNumber = (num) => {
     if (num >= 1_000_000_000) {
       return (num / 1_000_000_000).toFixed(1).replace(/\.0$/, "") + "B";
@@ -158,12 +186,16 @@ const Explore = () => {
     return num.toString();
   };
 
+  // Function to handle posts dropdown
   const handleDropDown = (postId) => {
     setActiveDropdownId((prevId) => (prevId === postId ? null : postId));
   };
 
-  const handleAddFriend = () => {
+  // Function to send friend requests.
+  const handleAddFriend = (id) => {
+    console.log("user is: ", id);
     toast.success("Add Friend Clicked!!!");
+    socket.emit("friendRequest", id);
   };
 
   // Function to handle scroll to top
@@ -196,27 +228,29 @@ const Explore = () => {
                   onClick={handleNotificationDropdown}
                 />
 
-                <div className="notification-dropdown-container">
-                  <div className="requests-container">
-                    {friendRequests.map((friendRequest, index) => {
-                      return (
-                        <div className="request" key={index}>
-                          <div className="avatar-container"></div>
-                          <div className="username-container">
-                            {friendRequest.name}
+                {notificationDropdown && (
+                  <div className="notification-dropdown-container">
+                    <div className="requests-container">
+                      {friendRequests.map((friendRequest, index) => {
+                        return (
+                          <div className="request" key={index}>
+                            <div className="avatar-container"></div>
+                            <div className="username-container">
+                              {friendRequest.name}
+                            </div>
+                            <div className="action-btn-container"></div>
                           </div>
-                          <div className="action-btn-container"></div>
-                        </div>
-                      );
-                    })}
+                        );
+                      })}
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
               <div className="createpost-icon-container">
                 <LuImagePlus
                   title="Create Post"
                   className="createpost-icon"
-                  onClick={createPoastHandler}
+                  onClick={createPostHandler}
                 />
               </div>
             </div>
@@ -357,12 +391,20 @@ const Explore = () => {
           <div className="popular-people-container">
             <div className="popular-people-wrapper">
               <div className="popular-people-heading-container">
-                <h4 className="popular-people-heading">Most Popular</h4>
+                <h4 className="popular-people-heading">Recommended Friends</h4>
               </div>
               <div className="popular-people">
-                {allusers.map((user, index) => {
+                {(allusers.length ===0) ? (() => {
+                  return(
+                    <div className="people">
+                      <div className="popular-people-username-container">
+                        <p>No new friend recommendations right now !</p>
+                      </div>
+                    </div>
+                  )
+                })(): allusers.map((user) => {
                   return (
-                    <div className="people" key={index}>
+                    <div className="people" key={user._id}>
                       <div className="popular-people-avatar-container"></div>
                       <div className="popular-people-username-container">
                         {user.name}
@@ -370,7 +412,9 @@ const Explore = () => {
                       <div className="popular-people-action-btn-container">
                         <button
                           className="add-friend-btn"
-                          onClick={handleAddFriend}
+                          onClick={() => {
+                            handleAddFriend(user._id);
+                          }}
                         >
                           Add Friend
                         </button>

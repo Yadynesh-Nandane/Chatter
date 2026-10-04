@@ -12,7 +12,7 @@ export const updateProfile = async (req, res) => {
     const updatedUser = await User.findByIdAndUpdate(
       userId,
       { phone },
-      { new: true }
+      { new: true },
     );
     res.status(200).json(updatedUser);
   } catch (error) {
@@ -31,11 +31,11 @@ export const getAllFriends = async (req, res) => {
       .populate("friends", "-password")
       .exec();
 
-    if (!usersFriends || usersFriends.friends.length == 0) {
-      return res
-        .status(404)
-        .json({ message: "No friends added, add friends to chat." });
-    }
+    // if (!usersFriends || usersFriends.friends.length == 0) {
+    //   return res
+    //     .status(404)
+    //     .json({ message: "No friends added, add friends to chat." });
+    // }
 
     res.status(200).json(usersFriends);
   } catch (error) {
@@ -44,18 +44,38 @@ export const getAllFriends = async (req, res) => {
   }
 };
 
-export const getAllUsers = async (req, res) => {
+export const getRecommendedFriends = async (req, res) => {
   try {
-    const users = await User.find().select("name");
+    const currentUser = req.user;
+    const currentUserId = req.user.id;
 
-    if(!users) {
-      console.log("No users found")
-      res.status(404).json({message: "No users found."});
-    }
+    // const users = await User.find({
+    //   $and: [
+    //     { _id: { $ne: currentUserId } }, //Exclude current user.
+
+    //     { _id: { $nin: currentUser.friends } }, //Exclude current user friends. ($id: does not work only _id)
+    //     {_id: {}}
+    //   ],
+    // }).select("-password");
+
+    const users = await User.find({
+      _id: {
+        $ne: currentUserId,
+        $nin: currentUser.friends,
+      }, //Exclude current user.
+      friends: {
+        $in: currentUser.friends,
+      },
+    }).select("-password");
+
+    // if (users.length <= 0) {
+    //   console.log("No users found");
+    //   res.status(404).json({ message: "No users found." });
+    // }
 
     res.status(200).json(users);
-  }
-  catch(error) {
+    res.status(200).json([]);
+  } catch (error) {
     console.log("Error while fetching all users: ", error);
   }
 };
