@@ -3,11 +3,10 @@ import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { BsThreeDotsVertical } from "react-icons/bs";
 
-import { useEffect } from "react";
+import { toast } from "sonner";
+import { useState, useEffect } from "react";
 import { axiosInstance } from "../../utils/axios.js";
 import CustomButton from "../CustomButton/CustomButton.jsx";
-import { useState } from "react";
-import { toast } from "sonner";
 
 // Demo Friends List for testing purpose
 // const chatsList = [
@@ -23,7 +22,7 @@ const ChatsList = () => {
   const user = useSelector((state) => state.auth?.signedIn.user);
 
   const logOutHandler = async () => {
-    const result = await axiosInstance.get("auth/signout");
+    const result = await axiosInstance.post("auth/signout");
     if (result.status === 200) {
       navigate({ to: "/signin" });
     }
@@ -68,31 +67,48 @@ const ChatsList = () => {
             </div>
           </div>
         </div>
-        {friendsList.map((friend, index) => {
-          return (
-            <Link
-              to={`/friends/${friend._id}`}
-              className="chatList-nav-links"
-              key={index}
-            >
-              <div className="chatlist-item-container">
-                <div className="chat-item-wrapper">
-                  <div className="chat-label-container">
-                    <p className="chat-label">{friend.name}</p>
+        {friendsList.length === 0
+          ? (() => {
+              return (
+                <div className="chatlist-item-container">
+                  <div className="chat-item-wrapper">
+                    <p>
+                      <Link to={`/explore`} className="chatlist-clickhere">
+                        <span className="chatlist-clickhere-span">
+                          Click Here{" "}
+                        </span>
+                      </Link>
+                      to add new friend
+                    </p>
                   </div>
-                  <div className="chat-message-container">
-                    {/* <p className="chat-message">{friend.messages}</p> */}
-                  </div>
-                </div>
-                <div className="chatMessage-count-container">
-                  <div className="chatMessage-count-circle">
-                    <p className="chatMessage-count">1</p>
-                  </div>
-                </div>
-              </div>
-            </Link>
-          );
-        })}
+                       </div>
+                     );
+            })()
+          : friendsList.map((friend, index) => {
+                return (
+                  <Link
+                    to={`/friends/${friend._id}`}
+                    className="chatList-nav-links"
+                    key={index}
+                  >
+                    <div className="chatlist-item-container">
+                      <div className="chat-item-wrapper">
+                        <div className="chat-label-container">
+                          <p className="chat-label">{friend.name}</p>
+                        </div>
+                        <div className="chat-message-container">
+                          {/* <p className="chat-message">{friend.messages}</p> */}
+                        </div>
+                      </div>
+                      <div className="chatMessage-count-container">
+                        <div className="chatMessage-count-circle">
+                          <p className="chatMessage-count">1</p>
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                );
+              })}
       </div>
     </div>
   );
